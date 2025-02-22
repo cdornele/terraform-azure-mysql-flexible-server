@@ -4,4 +4,9 @@
 
 - Initial module for Azure Resource Group.
 
+# Version 1.0.1
+
+- Added support for database creation.
+- Added support for public cidrs firewall rules.
+
 

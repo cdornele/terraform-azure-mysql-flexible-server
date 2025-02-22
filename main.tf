@@ -86,6 +86,25 @@ resource "azurerm_mysql_flexible_server" "this" {
   }
 }
 
+resource "azurerm_mysql_flexible_database" "this" {
+  for_each = var.mysql_databases
+
+  name                = each.key
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mysql_flexible_server.this.name
+  charset             = each.value.charset
+  collation           = each.value.collation
+}
+
+resource "azurerm_mysql_flexible_server_firewall_rule" "this" {
+  for_each = var.mysql_flexible_server_delegated_subnet_id == null ? var.mysql_flexible_server_firewall_allowed_cidrs : {}
+
+  name                = each.key
+  resource_group_name = var.resource_group_name
+  server_name         = azurerm_mysql_flexible_server.this.name
+  start_ip_address    = cidrhost(each.value, 0)
+  end_ip_address      = cidrhost(each.value, -1)
+}
 
 
 # end

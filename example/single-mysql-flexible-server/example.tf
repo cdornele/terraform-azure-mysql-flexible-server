@@ -25,7 +25,8 @@ module "resource_group" {
 }
 
 module "mysql_flexible_server" {
-  source = "../../"
+  source  = "cdornele/mysql-flexible-server/azure"
+  version = "1.0.1"
   mysql_flexible_server_stack = "test"
   mysql_flexible_server_prefixes = ["az","eus1"]
   mysql_flexible_server_suffixes = ["t","01"]
@@ -45,6 +46,19 @@ module "mysql_flexible_server" {
     "owner"        = "example"
     "project"      =  "example"
     "customer"     = "example"
+  }
+  mysql_databases = {
+    "test1" = {
+      "charset"   = "utf8"
+      "collation" = "utf8_general_ci"
+    },
+    "test2" = {
+      "charset"   = "utf8"
+      "collation" = "utf8_general_ci"
+    }
+  }
+  allowed_cidrs = {
+    "customer-office" = "1.1.1.1/32"
   }
 }
 
