@@ -57,7 +57,7 @@ module "mysql_flexible_server" {
       "collation" = "utf8_general_ci"
     }
   }
-  allowed_cidrs = {
+  mysql_flexible_server_firewall_allowed_cidrs = {
     "customer-office" = "1.1.1.1/32"
   }
 }
