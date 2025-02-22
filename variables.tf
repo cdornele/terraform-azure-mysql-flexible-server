@@ -142,5 +142,19 @@ variable "mysql_flexible_server_tags" {
   default     = {}
 }
 
+variable "mysql_databases" {
+  description = "The list of MySQL databases to create."
+  type        = map(object({
+    charset   = optional(string, "utf8")
+    collation = optional(string, "utf8_general_ci")
+  }))
+  default     = {}
+}
+
+variable "mysql_flexible_server_firewall_allowed_cidrs" {
+  description = "The list of allowed CIDRs to access the MySQL Flexible Server."
+  type        = map(string)
+  default     = {}
+}
 # end
 #--------------------------------------------*--------------------------------------------
